@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		30A074AD2EE4E91400A7A8C6 /* BookCabin_CheckInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074AC2EE4E91400A7A8C6 /* BookCabin_CheckInApp.swift */; };
-		30A074AF2EE4E91400A7A8C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074AE2EE4E91400A7A8C6 /* ContentView.swift */; };
 		30A074B12EE4E91600A7A8C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A074B02EE4E91600A7A8C6 /* Assets.xcassets */; };
 		30A074B42EE4E91600A7A8C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A074B32EE4E91600A7A8C6 /* Preview Assets.xcassets */; };
+		30A074BE2EE4EB9200A7A8C6 /* GlobalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074BD2EE4EB9200A7A8C6 /* GlobalExtensions.swift */; };
+		30A074CC2EE4FBA600A7A8C6 /* OnlineCheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074CB2EE4FBA600A7A8C6 /* OnlineCheckInView.swift */; };
+		30A074D02EE4FF5600A7A8C6 /* PassengerDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074CF2EE4FF5600A7A8C6 /* PassengerDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		30A074A92EE4E91400A7A8C6 /* BookCabin_CheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookCabin_CheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A074AC2EE4E91400A7A8C6 /* BookCabin_CheckInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCabin_CheckInApp.swift; sourceTree = "<group>"; };
-		30A074AE2EE4E91400A7A8C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		30A074B02EE4E91600A7A8C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30A074B32EE4E91600A7A8C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		30A074BD2EE4EB9200A7A8C6 /* GlobalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtensions.swift; sourceTree = "<group>"; };
+		30A074CB2EE4FBA600A7A8C6 /* OnlineCheckInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineCheckInView.swift; sourceTree = "<group>"; };
+		30A074CF2EE4FF5600A7A8C6 /* PassengerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				30A074AC2EE4E91400A7A8C6 /* BookCabin_CheckInApp.swift */,
-				30A074AE2EE4E91400A7A8C6 /* ContentView.swift */,
+				30A074BC2EE4EB6E00A7A8C6 /* Extensions */,
+				30A074BB2EE4E9AB00A7A8C6 /* ContentViews */,
+				30A074BA2EE4E96900A7A8C6 /* ViewModel */,
 				30A074B02EE4E91600A7A8C6 /* Assets.xcassets */,
 				30A074B22EE4E91600A7A8C6 /* Preview Content */,
 			);
@@ -65,6 +71,30 @@
 				30A074B32EE4E91600A7A8C6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		30A074BA2EE4E96900A7A8C6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		30A074BB2EE4E9AB00A7A8C6 /* ContentViews */ = {
+			isa = PBXGroup;
+			children = (
+				30A074CB2EE4FBA600A7A8C6 /* OnlineCheckInView.swift */,
+				30A074CF2EE4FF5600A7A8C6 /* PassengerDetailsView.swift */,
+			);
+			path = ContentViews;
+			sourceTree = "<group>";
+		};
+		30A074BC2EE4EB6E00A7A8C6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				30A074BD2EE4EB9200A7A8C6 /* GlobalExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30A074AF2EE4E91400A7A8C6 /* ContentView.swift in Sources */,
+				30A074CC2EE4FBA600A7A8C6 /* OnlineCheckInView.swift in Sources */,
+				30A074BE2EE4EB9200A7A8C6 /* GlobalExtensions.swift in Sources */,
+				30A074D02EE4FF5600A7A8C6 /* PassengerDetailsView.swift in Sources */,
 				30A074AD2EE4E91400A7A8C6 /* BookCabin_CheckInApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

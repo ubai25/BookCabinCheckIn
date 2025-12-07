@@ -11,7 +11,7 @@ import SwiftUI
 struct BookCabin_CheckInApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnlineCheckInView()
         }
     }
 }

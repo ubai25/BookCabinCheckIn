@@ -22,13 +22,13 @@ struct PassengerDetailsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(.white)
                 
-                Text("Passenger Name")
+                Text("Ahmad Ubaidillah")
                     .font(.title)
                     .bold()
                     .foregroundStyle(Color.Secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("flight Details")
+                Text("SQ 267 Singapore to Tokyo")
                     .font(.title2)
                     .foregroundStyle(Color.Secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)

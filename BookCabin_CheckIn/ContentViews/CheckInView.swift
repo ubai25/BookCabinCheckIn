@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CheckInView: View {
+//    let viewModel = 
     var body: some View {
         VStack {
             Text("CHECK-IN")

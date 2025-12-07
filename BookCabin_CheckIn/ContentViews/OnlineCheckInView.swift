@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct OnlineCheckInView: View {
+    @ObservedObject private var viewModel: BookCabinViewModel
     @State private var pnr = ""
     @State private var lastName = ""
+    
+    internal init(viewModel: BookCabinViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack {
@@ -49,7 +54,7 @@ struct OnlineCheckInView: View {
             Spacer()
             
             Button("CHECK IN") {
-              //user = UserModel()
+                viewModel.send(.checkIn(pnr: pnr, lastName: lastName))
             }
             .foregroundStyle(.white)
             .bold()
@@ -62,9 +67,12 @@ struct OnlineCheckInView: View {
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.Secondary)
+        .onAppear {
+            viewModel.send(.checkInViewOnAppear)
+        }
     }
 }
 
 #Preview {
-    OnlineCheckInView()
+    OnlineCheckInView(viewModel: BookCabinViewModel())
 }

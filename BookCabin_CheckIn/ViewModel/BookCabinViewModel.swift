@@ -25,7 +25,12 @@ final class BookCabinViewModel: ObservableObject {
         var document: Document? = nil
         let auth = "VmpFNlQwUk5NREpUUnpwUFJEcFBSQT09OlRVOUNNbE5IVDBRPQ=="
         var accessToken: String = ""
+        var sessionId: String = ""
         var displayState: DisplayState = .onlineCheckIn
+        var flightDetail: FlightDetail? = nil
+        var seqNumber: String = ""
+        var barCode: String = ""
+        var seatNumber: String = ""
     }
     
     enum Gender {
@@ -41,10 +46,11 @@ final class BookCabinViewModel: ObservableObject {
     indirect enum Action {
         case checkInViewOnAppear
         case getToken(action: Action?)
-        case onlineCheckIn
+        case onlineCheckIn(pnr: String, lastName: String)
         case getDocument
-        case saveDocument
-        case checkIn(pnr: String, lastName: String)
+        case saveDocument(Document)
+        case checkIn
+        case updateDisplayState(DisplayState)
     }
 
     func send(_ action: Action) {
@@ -54,24 +60,87 @@ final class BookCabinViewModel: ObservableObject {
     private func reducer(_ action: Action) {
         switch action {
             
-        case .onlineCheckIn:
-            // code
-            print("")
-        case .saveDocument:
-            // code
-            print("")
-        case let .checkIn(pnr, lastName):
+        case .checkIn:
+            checkInService.checkIn(passengerId: state.passengerId, token: state.accessToken, sessionID: state.sessionId) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                    
+                case let .success(data):
+                    if data.results.first?.status.first?.type.uppercased() == "SUCCESS" {
+                        self.state.seqNumber = data.boardingPasses.first?.boardingPass.checkInSequenceNumber ?? "0000"
+                        self.state.barCode = data.boardingPasses.first?.boardingPass.barCode ?? "0000"
+                        self.state.seatNumber = data.boardingPasses.first?.boardingPass.seat?.value ?? "0000"
+                        
+                        self.state.displayState = .barcode
+                    }
+                case let .failure(error):
+                    if case let .responseValidationFailed(reason) = error {
+                        if case let .customValidationFailed(innerError) = reason {
+                            let nsError = innerError as NSError
+
+                            let statusCode = nsError.userInfo["statusCode"] as? Int
+                            let rawBody = nsError.userInfo["rawBody"] as? String
+
+                            // i assume that the token has expired
+                            if statusCode == 401 {
+                                send(.getToken(action: .checkIn))
+                            }
+                        }
+                    }
+                    
+                    // force move to BarcodeView
+                    state.displayState = .barcode
+                }
+            }
+            
+        case let .saveDocument(document):
+            checkInService.setDocumentData(
+                doc: state.document ?? Document(), //shouldn't be nill
+                token: state.accessToken,
+                sessionID: state.sessionId,
+                passengerId: state.passengerId,
+                weightCategory: (state.gender == .female ? "ADULT_FEMALE" : "ADULT_MALE")) {[weak self] result in
+                    guard let self else { return }
+                    switch result {
+                    case let .success(data):
+                        if data.results.first?.status.first?.type.uppercased() == "SUCCESS" {
+                            state.displayState = .checkIn
+                        }
+                    case let .failure(error):
+                        if case let .responseValidationFailed(reason) = error {
+                            if case let .customValidationFailed(innerError) = reason {
+                                let nsError = innerError as NSError
+
+                                let statusCode = nsError.userInfo["statusCode"] as? Int
+                                let rawBody = nsError.userInfo["rawBody"] as? String
+
+                                // i assume that the token has expired
+                                if statusCode == 401 {
+                                    send(.getToken(action: .saveDocument(document)))
+                                }
+                            }
+                        }
+                        
+                        // force move to CheckInView
+                        state.displayState = .checkIn
+                    }
+                }
+        case let .onlineCheckIn(pnr, lastName):
             state.pnr = pnr
             state.lastName = lastName
             
             send(.getDocument)
-        case .getToken:
+        case let .getToken(furtherAction):
             checkInService.getToken(auth: state.auth) { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case let .success(data):
                     print("access_token : \(data.access_token)")
                     self.state.accessToken = data.access_token
+                    
+                    if let furtherAction {
+                        send(furtherAction)
+                    }
                 case let .failure(error):
                     print("error getToken: \(error)")
                 }
@@ -87,7 +156,7 @@ final class BookCabinViewModel: ObservableObject {
                 guard let self else { return }
                 switch result {
                 case let .success(data):
-                    if let passenger = data.reservation.passengers.passenger.first {
+                    if let passenger = data.reservation.reservation.passengers.passenger.first {
                         self.state.passengerId = passenger.id
                         self.state.firstName = passenger.personName.first
                         self.state.gender = (passenger.personName.prefix.lowercased() == "mr" ? .male : .female)
@@ -106,6 +175,12 @@ final class BookCabinViewModel: ObservableObject {
                         }
                         
                         state.displayState = .passengerDetails
+                        state.sessionId = data.sessionID ?? ""
+                        
+                        if let flightDetail = data.reservation.reservation.itinerary.itineraryPart.first?.segment.first?.flightDetail.first {
+                            state.flightDetail = flightDetail
+                        }
+                        
                     } else {
                         state.displayState = .reservationNotFound
                     }
@@ -117,12 +192,15 @@ final class BookCabinViewModel: ObservableObject {
                             let statusCode = nsError.userInfo["statusCode"] as? Int
                             let rawBody = nsError.userInfo["rawBody"] as? String
 
-                            // i assume it is Reservation not found
+                            // i assume it is 'Reservation not found'
                             if statusCode == 500 {
-                                state.displayState = .reservationNotFound
+//                                state.displayState = .reservationNotFound
+                                
+                                //force move to passengerDetails
+                                state.displayState = .passengerDetails
                             }
                             
-                            // i assume the token is expired
+                            // i assume that the token has expired
                             if statusCode == 401 {
                                 send(.getToken(action: .getDocument))
                             }
@@ -130,6 +208,8 @@ final class BookCabinViewModel: ObservableObject {
                     }
                 }
             }
+        case let .updateDisplayState(newState):
+            state.displayState = newState
         }
     }
     

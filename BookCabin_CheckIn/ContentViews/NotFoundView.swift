@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct NotFoundView: View {
+    @ObservedObject private var viewModel: BookCabinViewModel
+    
+    internal init(viewModel: BookCabinViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         VStack {
             Text("RESERVATION NOT FOUND")
@@ -21,7 +27,7 @@ struct NotFoundView: View {
             Spacer()
             
             Button("BACK") {
-              //user = UserModel()
+                viewModel.send(.updateDisplayState(.onlineCheckIn))
             }
             .foregroundStyle(.white)
             .bold()
@@ -35,5 +41,5 @@ struct NotFoundView: View {
 }
 
 #Preview {
-    NotFoundView()
+    NotFoundView(viewModel: BookCabinViewModel())
 }

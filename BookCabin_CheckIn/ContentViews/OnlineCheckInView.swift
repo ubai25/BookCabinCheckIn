@@ -33,7 +33,7 @@ struct OnlineCheckInView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("PNR", text: $pnr)
+            TextField("PNR (minimum 6 characters)", text: $pnr)
                 .padding(.horizontal)
                 .frame(minHeight: 50)
                 .background(Color.white)
@@ -45,7 +45,7 @@ struct OnlineCheckInView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("LastName", text: $lastName)
+            TextField("LastName (must not be empty)", text: $lastName)
                 .padding(.horizontal)
                 .frame(minHeight: 50)
                 .background(Color.white)
@@ -54,15 +54,16 @@ struct OnlineCheckInView: View {
             Spacer()
             
             Button("CHECK IN") {
-                viewModel.send(.checkIn(pnr: pnr, lastName: lastName))
+                viewModel.send(.onlineCheckIn(pnr: pnr, lastName: lastName))
             }
             .foregroundStyle(.white)
             .bold()
             .frame(maxWidth: .infinity)
             .padding()
-            .background(Color.Primary)
+            .background(lastName == "" || pnr.count < 6 ? Color.gray : Color.Primary)
             .cornerRadius(8)
             .padding(.top, 50)
+            .disabled(lastName == "" || pnr.count < 6)
         }
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

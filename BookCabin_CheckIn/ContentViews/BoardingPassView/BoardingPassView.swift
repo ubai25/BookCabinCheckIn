@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct BoardingPassView: View {
+    @ObservedObject private var viewModel: BookCabinViewModel
+    
+    internal init(viewModel: BookCabinViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             Text("Boarding Pass")
@@ -19,7 +25,7 @@ struct BoardingPassView: View {
                 .background(.white)
             
             VStack(spacing: 0) {
-                Text("AHMAD UBAIDILLAH")
+                Text("\(viewModel.state.firstName) \(viewModel.state.lastName)")
                     .font(.title)
                     .foregroundStyle(Color.white)
                     .fontWeight(.semibold)
@@ -29,7 +35,7 @@ struct BoardingPassView: View {
 
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        Text("SQ 527")
+                        Text(viewModel.state.flightDetail?.flightNumber ?? "0000")
                             .font(.title2)
                             .foregroundStyle(Color.Secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -45,7 +51,7 @@ struct BoardingPassView: View {
                     }
                     
                     HStack(spacing: 0) {
-                        Text("S22")
+                        Text(viewModel.state.seqNumber)
                             .font(.system(size: 45))
                             .bold()
                             .foregroundStyle(Color.Secondary)
@@ -53,7 +59,7 @@ struct BoardingPassView: View {
                             .padding(EdgeInsets(top: 0, leading: 36, bottom: 36, trailing: 36))
                             .background(Color.Beige)
                         
-                        Text("22A")
+                        Text(viewModel.state.seatNumber)
                             .font(.system(size: 45))
                             .bold()
                             .foregroundStyle(Color.Secondary)
@@ -74,14 +80,14 @@ struct BoardingPassView: View {
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        Text("SIN")
+                        Text(viewModel.state.flightDetail?.departureAirport ?? "N/A")
                             .font(.title2)
                             .foregroundStyle(Color.Secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(EdgeInsets(top: 24, leading: 36, bottom: 18, trailing: 36))
                             .background(Color.Beige)
                         
-                        Text("HNO")
+                        Text(viewModel.state.flightDetail?.arrivalAirport ?? "N/A")
                             .font(.title2)
                             .foregroundStyle(Color.Secondary)
                             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -90,7 +96,7 @@ struct BoardingPassView: View {
                     }
                     
                     HStack(spacing: 0) {
-                        BarcodeView(data: "M1TEST")
+                        BarcodeView(data: viewModel.state.barCode)
                             .cornerRadius(24)
                     }
                     .foregroundStyle(Color.Secondary)
@@ -115,5 +121,5 @@ struct Line: Shape {
 }
 
 #Preview {
-    BoardingPassView()
+    BoardingPassView(viewModel: BookCabinViewModel())
 }

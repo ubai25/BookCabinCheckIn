@@ -14,13 +14,13 @@ struct RootView: View {
         case .onlineCheckIn:
             OnlineCheckInView(viewModel: viewModel)
         case .reservationNotFound:
-            PassengerDetailsView()
+            NotFoundView(viewModel: viewModel)
         case .passengerDetails:
-            PassengerDetailsView()
+            PassengerDetailsView(viewModel: viewModel)
         case .checkIn:
-            CheckInView()
+            CheckInView(viewModel: viewModel)
         case .barcode:
-            BoardingPassView()
+            BoardingPassView(viewModel: viewModel)
         }
     }
 }

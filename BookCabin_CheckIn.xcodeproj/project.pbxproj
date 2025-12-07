@@ -23,6 +23,9 @@
 		30FEF5DB2EE5BA4300D8557D /* ReservationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FEF5DA2EE5BA4300D8557D /* ReservationResponse.swift */; };
 		30FEF5DD2EE5D99400D8557D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FEF5DC2EE5D99400D8557D /* RootView.swift */; };
 		30FEF5DF2EE5DBA900D8557D /* NotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FEF5DE2EE5DBA900D8557D /* NotFoundView.swift */; };
+		30FEF5E12EE5E20800D8557D /* DocumentUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FEF5E02EE5E20800D8557D /* DocumentUpdateResponse.swift */; };
+		30FEF5E32EE5E74500D8557D /* DocumentUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FEF5E22EE5E74500D8557D /* DocumentUpdateRequest.swift */; };
+		30FEF5E52EE6123C00D8557D /* CheckInResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FEF5E42EE6123C00D8557D /* CheckInResponse.swift */; };
 		9804D4EC3EAD346A93D224DA /* Pods_BookCabin_CheckIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD468CC791145AD66FAC7F9 /* Pods_BookCabin_CheckIn.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +47,9 @@
 		30FEF5DA2EE5BA4300D8557D /* ReservationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationResponse.swift; sourceTree = "<group>"; };
 		30FEF5DC2EE5D99400D8557D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		30FEF5DE2EE5DBA900D8557D /* NotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundView.swift; sourceTree = "<group>"; };
+		30FEF5E02EE5E20800D8557D /* DocumentUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUpdateResponse.swift; sourceTree = "<group>"; };
+		30FEF5E22EE5E74500D8557D /* DocumentUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUpdateRequest.swift; sourceTree = "<group>"; };
+		30FEF5E42EE6123C00D8557D /* CheckInResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInResponse.swift; sourceTree = "<group>"; };
 		927952EA9866825D0663E639 /* Pods-BookCabin_CheckIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCabin_CheckIn.release.xcconfig"; path = "Target Support Files/Pods-BookCabin_CheckIn/Pods-BookCabin_CheckIn.release.xcconfig"; sourceTree = "<group>"; };
 		CAD468CC791145AD66FAC7F9 /* Pods_BookCabin_CheckIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookCabin_CheckIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD6AED149084BBA232292AB /* Pods-BookCabin_CheckIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCabin_CheckIn.debug.xcconfig"; path = "Target Support Files/Pods-BookCabin_CheckIn/Pods-BookCabin_CheckIn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 				30A074E12EE5A21A00A7A8C6 /* TokenResponse.swift */,
 				30A074E32EE5A4CA00A7A8C6 /* PassportDocument.swift */,
 				30FEF5DA2EE5BA4300D8557D /* ReservationResponse.swift */,
+				30FEF5E02EE5E20800D8557D /* DocumentUpdateResponse.swift */,
+				30FEF5E22EE5E74500D8557D /* DocumentUpdateRequest.swift */,
+				30FEF5E42EE6123C00D8557D /* CheckInResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -290,6 +299,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				30A074DF2EE5A17E00A7A8C6 /* CheckInService.swift in Sources */,
+				30FEF5E32EE5E74500D8557D /* DocumentUpdateRequest.swift in Sources */,
+				30FEF5E52EE6123C00D8557D /* CheckInResponse.swift in Sources */,
 				30A074CC2EE4FBA600A7A8C6 /* OnlineCheckInView.swift in Sources */,
 				30A074DA2EE586DA00A7A8C6 /* BarcodeView.swift in Sources */,
 				30A074BE2EE4EB9200A7A8C6 /* GlobalExtensions.swift in Sources */,
@@ -303,6 +314,7 @@
 				30A074DC2EE59BAF00A7A8C6 /* BookCabinViewModel.swift in Sources */,
 				30A074E42EE5A4CA00A7A8C6 /* PassportDocument.swift in Sources */,
 				30FEF5DB2EE5BA4300D8557D /* ReservationResponse.swift in Sources */,
+				30FEF5E12EE5E20800D8557D /* DocumentUpdateResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

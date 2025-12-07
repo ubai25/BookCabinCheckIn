@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct CheckInView: View {
-//    let viewModel = 
+    @ObservedObject private var viewModel: BookCabinViewModel
+    
+    internal init(viewModel: BookCabinViewModel) {
+        self.viewModel = viewModel
+    }
+
     var body: some View {
         VStack {
             Text("CHECK-IN")
@@ -18,14 +23,14 @@ struct CheckInView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 36)
             
-            Text("Ahmad Ubaidillah")
+            Text("\(viewModel.state.firstName) \(viewModel.state.lastName)")
                 .font(.largeTitle)
                 .bold()
                 .foregroundStyle(Color.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 24)
             
-            Text("SQ 267 Singapore to Tokyo")
+            Text("\(viewModel.state.flightDetail?.flightNumber ?? "") \(viewModel.state.flightDetail?.departureAirport ?? "") to \(viewModel.state.flightDetail?.arrivalAirport ?? "")")
                 .font(.title2)
                 .foregroundStyle(Color.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -33,7 +38,7 @@ struct CheckInView: View {
             Spacer()
             
             Button("CHECK IN") {
-              //user = UserModel()
+                viewModel.send(.checkIn)
             }
             .foregroundStyle(.white)
             .font(.largeTitle)
@@ -50,5 +55,5 @@ struct CheckInView: View {
 }
 
 #Preview {
-    CheckInView()
+    CheckInView(viewModel: BookCabinViewModel())
 }

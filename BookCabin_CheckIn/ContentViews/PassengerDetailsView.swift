@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct PassengerDetailsView: View {
-    @State private var dummy = ""
+    @ObservedObject private var viewModel: BookCabinViewModel
+    
+    internal init(viewModel: BookCabinViewModel) {
+        self.viewModel = viewModel
+        self.localDocument = viewModel.state.document ?? Document()
+    }
+    
+    @State private var localDocument: Document
     @State private var dummyDate: Date = Date()
     
     var body: some View {
@@ -52,24 +59,24 @@ struct PassengerDetailsView: View {
                 Text("Passport Number")
                     .passengerDetailsTextStyle()
                 
-                TextField("Passport Number", text: $dummy)
+                TextField("Passport Number", text: $localDocument.number)
                     .passengerDetailsTextFieldStyle()
                     .padding(.bottom)
                 
                 Text("Passenger Name")
                     .passengerDetailsTextStyle()
                 
-                TextField("First Name", text: $dummy)
+                TextField("First Name", text: $localDocument.personName.first)
                     .passengerDetailsTextFieldStyle()
                 
-                TextField("Last Name", text: $dummy)
+                TextField("Last Name", text: $localDocument.personName.last)
                     .passengerDetailsTextFieldStyle()
                     .padding(.bottom)
                 
                 Text("Nationality")
                     .passengerDetailsTextStyle()
                 
-                TextField("Nationality", text: $dummy)
+                TextField("Nationality", text: $localDocument.nationality)
                     .passengerDetailsTextFieldStyle()
                     .padding(.bottom)
                 
@@ -77,7 +84,7 @@ struct PassengerDetailsView: View {
                     Text("Gender")
                         .passengerDetailsTextStyle()
                     
-                    Picker("Flavor", selection: $dummy) {
+                    Picker("Flavor", selection: $localDocument.gender) {
                         Text("MALE").tag("MALE")
                         Text("FEMALE").tag("FEMALE")
                     }
@@ -89,11 +96,11 @@ struct PassengerDetailsView: View {
                 Text("Country Of Birth")
                     .passengerDetailsTextStyle()
                 
-                TextField("Country Of Birth", text: $dummy)
+                TextField("Country Of Birth", text: $localDocument.countryOfBirth)
                     .passengerDetailsTextFieldStyle()
                     .padding(.bottom)
                 
-                DatePicker("Date of Birth", selection: $dummyDate, displayedComponents: .date)
+                DatePicker("Date of Birth", selection: DateStringBinding.binding(string: $localDocument.dateOfBirth), displayedComponents: .date)
                     .font(.title3)
                     .bold()
                     .padding(.bottom)
@@ -101,29 +108,29 @@ struct PassengerDetailsView: View {
                 Text("Issuing Country")
                     .passengerDetailsTextStyle()
 
-                TextField("Issuing Country", text: $dummy)
+                TextField("Issuing Country", text: $localDocument.issuingCountry)
                     .passengerDetailsTextFieldStyle()
                     .padding(.bottom)
                 
                 Text("Issuing Place")
                     .passengerDetailsTextStyle()
 
-                TextField("Issuing Place", text: $dummy)
+                TextField("Issuing Place", text: $localDocument.issuingPlace)
                     .passengerDetailsTextFieldStyle()
                     .padding(.bottom)
                 
-                DatePicker("Issue Date", selection: $dummyDate, displayedComponents: .date)
+                DatePicker("Issue Date", selection: DateStringBinding.binding(string: $localDocument.issueDate), displayedComponents: .date)
                     .font(.title3)
                     .bold()
                     .padding(.bottom)
                 
-                DatePicker("Expiry Date", selection: $dummyDate, displayedComponents: .date)
+                DatePicker("Expiry Date", selection: DateStringBinding.binding(string: $localDocument.expiryDate), displayedComponents: .date)
                     .font(.title3)
                     .bold()
                     .padding(.bottom)
                 
                 Button("SAVE") {
-                  //user = UserModel()
+                    viewModel.send(.saveDocument(localDocument))
                 }
                 .foregroundStyle(.white)
                 .bold()
@@ -160,6 +167,26 @@ fileprivate extension View {
 }
 
 #Preview {
-    PassengerDetailsView()
+    PassengerDetailsView(viewModel: BookCabinViewModel())
 }
 
+struct DateStringBinding {
+    static func binding(
+        string: Binding<String>,
+        format: String = "yyyy-MM-dd"
+    ) -> Binding<Date> {
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
+        return Binding<Date>(
+            get: {
+                formatter.date(from: string.wrappedValue) ?? Date()
+            },
+            set: { newDate in
+                string.wrappedValue = formatter.string(from: newDate)
+            }
+        )
+    }
+}

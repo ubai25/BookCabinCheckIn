@@ -69,3 +69,8 @@ struct FlightDetail: Codable {
     let arrivalAirport: String
     let departureAirport: String
 }
+
+struct ReservationResult {
+    let reservation: ReservationResponse
+    let sessionID: String?
+}

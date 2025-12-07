@@ -48,7 +48,7 @@ struct OnlineCheckInView: View {
             Spacer()
             
             Button("CHECK IN") {
-//                user = UserModel()
+              //user = UserModel()
             }
             .foregroundStyle(.white)
             .bold()

@@ -18,19 +18,19 @@ final class BookCabinViewModel: ObservableObject {
     
     struct State {
         var pnr: String = ""
-        var passengerId: String = ""
-        var firstName: String = ""
-        var lastName: String = ""
-        var gender: Gender? = nil
+        var passengerId: String = "id.01"
+        var firstName: String = "Ahmad"
+        var lastName: String = "Ubaidillah"
+        var gender: Gender? = .male
         var document: Document? = nil
         let auth = "VmpFNlQwUk5NREpUUnpwUFJEcFBSQT09OlRVOUNNbE5IVDBRPQ=="
         var accessToken: String = ""
         var sessionId: String = ""
         var displayState: DisplayState = .onlineCheckIn
-        var flightDetail: FlightDetail? = nil
-        var seqNumber: String = ""
-        var barCode: String = ""
-        var seatNumber: String = ""
+        var flightDetail: FlightDetail? = FlightDetail(flightNumber: "14045", arrivalAirport: "SIN", departureAirport: "CGK")
+        var seqNumber: String = "S125"
+        var barCode: String = "BARCODE"
+        var seatNumber: String = "25A"
     }
     
     enum Gender {
@@ -88,8 +88,9 @@ final class BookCabinViewModel: ObservableObject {
                         }
                     }
                     
-                    // force move to BarcodeView
-                    state.displayState = .barcode
+                    // need error handling here
+                    // harcoded move to BarcodeView for testing
+//                    state.displayState = .barcode
                 }
             }
             
@@ -121,8 +122,9 @@ final class BookCabinViewModel: ObservableObject {
                             }
                         }
                         
-                        // force move to CheckInView
-                        state.displayState = .checkIn
+                        // need error handling here
+                        // harcoded move to CheckInView  for testing
+//                        state.displayState = .checkIn
                     }
                 }
         case let .onlineCheckIn(pnr, lastName):
@@ -194,18 +196,20 @@ final class BookCabinViewModel: ObservableObject {
 
                             // i assume it is 'Reservation not found'
                             if statusCode == 500 {
-//                                state.displayState = .reservationNotFound
+                                state.displayState = .reservationNotFound
                                 
-                                //force move to passengerDetails
-                                state.displayState = .passengerDetails
+                                //haracoded move to passengerDetails for testing
+//                                state.displayState = .passengerDetails
                             }
                             
-                            // i assume that the token has expired
+                            // assume that the token has expired
                             if statusCode == 401 {
                                 send(.getToken(action: .getDocument))
                             }
                         }
                     }
+                    
+                    // need error handling
                 }
             }
         case let .updateDisplayState(newState):

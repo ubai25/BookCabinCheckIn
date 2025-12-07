@@ -56,7 +56,7 @@ struct BoardingPassView: View {
                             .bold()
                             .foregroundStyle(Color.Secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(EdgeInsets(top: 0, leading: 36, bottom: 36, trailing: 36))
+                            .padding(EdgeInsets(top: 0, leading: 36, bottom: 36, trailing: 0))
                             .background(Color.Beige)
                         
                         Text(viewModel.state.seatNumber)
@@ -64,7 +64,7 @@ struct BoardingPassView: View {
                             .bold()
                             .foregroundStyle(Color.Secondary)
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding(EdgeInsets(top: 0, leading: 36, bottom: 36, trailing: 36))
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 36, trailing: 36))
                             .background(Color.Beige)
                     }
                 }

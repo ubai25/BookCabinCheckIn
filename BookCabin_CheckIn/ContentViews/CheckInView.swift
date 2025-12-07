@@ -1,5 +1,5 @@
 //
-//  OnlineCheckInView.swift
+//  CheckInView.swift
 //  BookCabin_CheckIn
 //
 //  Created by Ubaidillah Ahmad on 07/12/25.
@@ -7,44 +7,27 @@
 
 import SwiftUI
 
-struct OnlineCheckInView: View {
-    @State private var pnr = ""
-    @State private var lastName = ""
-    
+struct CheckInView: View {
     var body: some View {
         VStack {
-            Text("ONLINE CHECK IN")
+            Text("CHECK-IN")
                 .font(.system(size: 50))
                 .fontWeight(.heavy)
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 36)
             
-            Spacer()
-            
-            Text("PNR")
-                .font(.title2)
+            Text("Ahmad Ubaidillah")
+                .font(.largeTitle)
                 .bold()
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 24)
             
-            TextField("PNR", text: $pnr)
-                .padding(.horizontal)
-                .frame(minHeight: 50)
-                .background(Color.white)
-                .cornerRadius(8)
-            
-            Text("Last Name")
+            Text("SQ 267 Singapore to Tokyo")
                 .font(.title2)
-                .bold()
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
-            TextField("LastName", text: $lastName)
-                .padding(.horizontal)
-                .frame(minHeight: 50)
-                .background(Color.white)
-                .cornerRadius(8)
             
             Spacer()
             
@@ -52,12 +35,12 @@ struct OnlineCheckInView: View {
               //user = UserModel()
             }
             .foregroundStyle(.white)
+            .font(.largeTitle)
             .bold()
             .frame(maxWidth: .infinity)
             .padding()
             .background(Color.Primary)
             .cornerRadius(8)
-            .padding(.top, 50)
         }
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -66,5 +49,5 @@ struct OnlineCheckInView: View {
 }
 
 #Preview {
-    OnlineCheckInView()
+    CheckInView()
 }

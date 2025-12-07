@@ -13,6 +13,9 @@
 		30A074BE2EE4EB9200A7A8C6 /* GlobalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074BD2EE4EB9200A7A8C6 /* GlobalExtensions.swift */; };
 		30A074CC2EE4FBA600A7A8C6 /* OnlineCheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074CB2EE4FBA600A7A8C6 /* OnlineCheckInView.swift */; };
 		30A074D02EE4FF5600A7A8C6 /* PassengerDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074CF2EE4FF5600A7A8C6 /* PassengerDetailsView.swift */; };
+		30A074D22EE56AD700A7A8C6 /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074D12EE56AD700A7A8C6 /* CheckInView.swift */; };
+		30A074D42EE57FB000A7A8C6 /* BoardingPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074D32EE57FB000A7A8C6 /* BoardingPassView.swift */; };
+		30A074DA2EE586DA00A7A8C6 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A074D92EE586DA00A7A8C6 /* BarcodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +26,9 @@
 		30A074BD2EE4EB9200A7A8C6 /* GlobalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtensions.swift; sourceTree = "<group>"; };
 		30A074CB2EE4FBA600A7A8C6 /* OnlineCheckInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineCheckInView.swift; sourceTree = "<group>"; };
 		30A074CF2EE4FF5600A7A8C6 /* PassengerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerDetailsView.swift; sourceTree = "<group>"; };
+		30A074D12EE56AD700A7A8C6 /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
+		30A074D32EE57FB000A7A8C6 /* BoardingPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingPassView.swift; sourceTree = "<group>"; };
+		30A074D92EE586DA00A7A8C6 /* BarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +89,10 @@
 		30A074BB2EE4E9AB00A7A8C6 /* ContentViews */ = {
 			isa = PBXGroup;
 			children = (
+				30A074D52EE5866B00A7A8C6 /* BoardingPassView */,
 				30A074CB2EE4FBA600A7A8C6 /* OnlineCheckInView.swift */,
 				30A074CF2EE4FF5600A7A8C6 /* PassengerDetailsView.swift */,
+				30A074D12EE56AD700A7A8C6 /* CheckInView.swift */,
 			);
 			path = ContentViews;
 			sourceTree = "<group>";
@@ -95,6 +103,15 @@
 				30A074BD2EE4EB9200A7A8C6 /* GlobalExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		30A074D52EE5866B00A7A8C6 /* BoardingPassView */ = {
+			isa = PBXGroup;
+			children = (
+				30A074D32EE57FB000A7A8C6 /* BoardingPassView.swift */,
+				30A074D92EE586DA00A7A8C6 /* BarcodeView.swift */,
+			);
+			path = BoardingPassView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,7 +185,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				30A074CC2EE4FBA600A7A8C6 /* OnlineCheckInView.swift in Sources */,
+				30A074DA2EE586DA00A7A8C6 /* BarcodeView.swift in Sources */,
 				30A074BE2EE4EB9200A7A8C6 /* GlobalExtensions.swift in Sources */,
+				30A074D22EE56AD700A7A8C6 /* CheckInView.swift in Sources */,
+				30A074D42EE57FB000A7A8C6 /* BoardingPassView.swift in Sources */,
 				30A074D02EE4FF5600A7A8C6 /* PassengerDetailsView.swift in Sources */,
 				30A074AD2EE4E91400A7A8C6 /* BookCabin_CheckInApp.swift in Sources */,
 			);

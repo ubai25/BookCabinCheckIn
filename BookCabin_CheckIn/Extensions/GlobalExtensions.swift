@@ -11,6 +11,7 @@ import SwiftUI
 extension Color {
     static let Primary = Color(hex: "#FF6600")
     static let Secondary = Color(hex: "#001F4D")
+    static let Beige = Color(hex: "#FFE4C4")
 
     // MARK: - Hex initializer
     init(hex: String) {
